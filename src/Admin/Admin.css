@@ -1,0 +1,48 @@
+a {
+  /* color: white; */
+  text-decoration: none;
+}
+.admin {
+  width: 900px;
+}
+.admin__header {
+  display: flex;
+  justify-content: space-between;
+}
+.admin__table {
+  margin-top: 30px;
+}
+.admin__btn-group {
+  border-radius: 5px !important;
+}
+.admin__btn-logout {
+  border-radius: 5px !important;
+}
+.admin__delete-btn {
+  width: 37px;
+  height: 37px;
+  background: url("../../public/icons/delete.svg") no-repeat white;
+  background-color: #0d6efd;
+  background-position: 9px 9px;
+  margin-right: 10px;
+}
+.admin__lock-btn {
+  width: 37px;
+  height: 37px;
+  background: url("../../public/icons/lock.svg") no-repeat;
+  background-color: #0d6efd;
+  background-position: 9px 9px;
+  color: white;
+  margin-right: 10px;
+}
+.admin__unlock-btn {
+  width: 37px;
+  height: 37px;
+  background: url("../../public/icons/check.svg") no-repeat;
+  background-color: #0d6efd;
+  background-position: 9px 9px;
+  color: white;
+}
+.sign-out-btn {
+  color: white !important;
+}
