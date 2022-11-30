@@ -2,6 +2,7 @@ import "./Admin.css";
 import { NavLink, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../src/actions";
+import { v4 as uuidv4 } from "uuid";
 
 const Admin = (props) => {
   if (!props.loggedIn) {
@@ -9,8 +10,9 @@ const Admin = (props) => {
   }
 
   const elements = props.users.map((user) => {
+    const id = uuidv4();
     return (
-      <tr key={user.id}>
+      <tr key={id}>
         <td>
           <input
             type="checkbox"

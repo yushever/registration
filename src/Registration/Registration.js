@@ -1,7 +1,7 @@
 import "./Registration.css";
 import { useState } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { connect, dispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as actions from "../../src/actions";
 
 const Registration = (props) => {
@@ -17,6 +17,8 @@ const Registration = (props) => {
     const { name, value } = e.target;
     setUser((user) => ({ ...user, [name]: value }));
   }
+
+  let navigate = useNavigate();
 
   return (
     <div className="reg input-group mb-3">
@@ -44,10 +46,12 @@ const Registration = (props) => {
       />
       <button
         className="btn btn-primary reg__button"
-        onClick={() => props.register(username, email, password)}
+        onClick={() => {
+          props.register(username, email, password);
+          navigate("/");
+        }}
       >
-        {" "}
-        Register{" "}
+        Register
       </button>
       <button className="btn btn-link login__button">
         <NavLink to="/">Already have an account?</NavLink>

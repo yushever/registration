@@ -1,37 +1,28 @@
 import { Reducer } from "redux";
 import * as actions from "./actions";
 import { format } from "date-fns";
+import { v4 as uuidv4 } from "uuid";
 
 function reducer(
   state = {
     users: [
       {
-        id: 1,
-        name: "Wombat",
-        email: "a@mail.ru",
-        pass: "AAAA",
-        regTime: "",
-        authTime: "",
+        id: uuidv4(),
+        name: "cat",
+        email: "cat@mail.com",
+        pass: "cat",
+        regTime: "Nov 20, 2022, 10:00:00 AM",
+        authTime: "Nov 21, 2022, 10:00:00 AM",
         checked: false,
         blocked: false,
       },
       {
-        id: 2,
-        name: "Kotyanya",
-        email: "a@mail.ru",
-        pass: "AAAA",
-        regTime: "",
-        authTime: "",
-        checked: false,
-        blocked: false,
-      },
-      {
-        id: 3,
+        id: uuidv4(),
         name: "admin",
-        email: "a@mail.ru",
+        email: "admin@mail.ru",
         pass: "admin",
-        regTime: "",
-        authTime: "",
+        regTime: "Nov 20, 2022, 12:00:00 AM",
+        authTime: "Nov 21, 2022, 12:00:00 AM",
         checked: false,
         blocked: false,
       },
@@ -42,13 +33,11 @@ function reducer(
 ) {
   switch (action.type) {
     case actions.LOGIN:
-      console.log(state.users);
       const loggingUser = state.users.find((user) => {
         return user.name === action.payload.username;
       });
       let auth = Date.now();
       const authT = format(new Date(auth), "PPpp");
-      console.log(loggingUser, authT);
 
       if (!loggingUser) {
         return state;
@@ -72,14 +61,12 @@ function reducer(
     case actions.REG:
       let reg = Date.now();
       const result = format(new Date(reg), "PPpp");
-      console.log(reg, result);
       let user = {
-        id: state.users.length + 1,
+        id: uuidv4(),
         regTime: result,
         ...action.payload,
       };
       state.users.push(user);
-      console.log(state);
       return { ...state };
 
     case actions.CHECK:
@@ -94,7 +81,6 @@ function reducer(
         ...data1.slice(idx1 + 1),
       ];
 
-      console.log("checked", newItem1);
       return { ...state, users: newArray1 };
 
     case actions.CHECKALL:
@@ -122,7 +108,6 @@ function reducer(
           return { ...user, checked: false };
         }
       });
-      console.log(blockedUsers);
 
       let findUser = blockedUsers.find((user) => user.id === state.loggedIn.id);
       if (findUser.blocked) {
@@ -139,7 +124,6 @@ function reducer(
           return { ...user, checked: false };
         }
       });
-      console.log(unblockedUsers);
       return { ...state, users: unblockedUsers };
 
     default:
